@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kami</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+   <style>
+       *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header{
+            background: url('./images/cool-background.png') no-repeat;
+            background-size: cover;
+            background-position: left;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        header>span{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.3));
+        }
+        header>section{
+            position: absolute;
+            top: 5%;
+            left: 95%;
+            transform: translate(-95%,-5%);
+            display: flex;
+            justify-content: space-between;
+            width: 7%;
+            font-size: 20px;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 8px 10px;
+            border-radius: 10px;
+            backdrop-filter: blur(100px);
+            background-clip: padding-box;
+            border: solid 1px grey;
+            box-shadow: 0px 0px 20px 0px #555;
+        }
+        header>div{
+            padding: 40px;
+            letter-spacing: 1px;
+            color: whitesmoke; 
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 1;
+            font-family: 'Poiret One', cursive;
+        }
+        header>div>h1{
+            border-radius: 5px;
+            margin: 2% 0;
+            color: #333;
+        }
+        header>div>p{
+            margin: 2% 0;
+        }
+        header>div>div{
+            background: white;
+            width: 80%;
+            border-radius: 3px;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 20px;
+            padding: 10px ;
+            cursor: pointer;
+            box-shadow: 0px 0px 60px 0px rgba(51, 51, 51, 0.3);
+        }
+        header>div>div>input{
+            border: none;
+            background: transparent;
+            outline: none;
+        }
+        strong{
+            opacity: 0.7;
+        }
+        .parent{
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            background: transparent;
+            position: relative;
+        }
+        .left,.right,.center{
+            flex: 0.5;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            height: 100%; 
+            padding: 10px;
+        }
+
+        @media screen and (max-width: 1200px){
+                .left,.right,.center{
+                    padding:2px
+                }
+                header>section{
+                    width: 10%;
+                }
+            }
+        .parent>div>img{
+            width: 100%;
+            height: 100%;
+            margin-bottom: 3%;
+            animation: opacify 3s ease-in;
+            padding: 5px;
+            border:1px solid whitesmoke ;
+        }
+        @keyframes opacify {
+            0%{
+                filter: blur(5px);
+            }
+            100%{
+                filter: blur(0);
+            }
+        }
+        @keyframes darken {
+            100%{
+                background: #333;
+                color: whitesmoke;
+            }
+        }
+        @keyframes lighten {
+            100%{
+                background: white;
+                color: #333;
+            }
+        }
+        i{
+            cursor: pointer;
+        }
+        @keyframes RotatorOne {
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform: rotate(180deg);
+            }
+        }
+
+        @keyframes RotatorTwo {
+            0%{
+                transform: rotate(180deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+
+   </style>
+</head>
+<body>
+    <header>
+        <div >
+            <h1>Gallery</h1>
+            <div>
+                <input type="text" placeholder="artist, nature, design,....">
+                <i class="fas fa-search"></i>
+            </div>
+            <p>The internet’s source of freely-usable images.
+                Powered by creators everywhere.</p>
+            <strong>Trending:flower, wallpapers, backgrounds, happy, love</strong>
+        </div>
+        <section>
+            <i onclick="themer(this)" id="adjust" style="color:black" class="fas fa-adjust"></i>
+            <i class="fab fa-github" ></i>
+            <i style="color: rgb(4, 56, 135);" class="fab fa-linkedin-in"></i>
+        </section>
+        <span></span>
+    </header>
+    <div class="parent"> 
+        <div class="left">
+        </div>
+        <div class="center">
+        </div>
+        <div class="right">
+        </div>
+    </div>
+    <script>
+        const left = document.querySelector('.left');
+        const center = document.querySelector('.center');
+        const right = document.querySelector('.right');
+        let i=1;
+
+        while (i<42){
+            for(let j=i;j<=i+2;j++){
+                const img = document.createElement('img');
+                let source = `./images/${j}.jpeg`;
+                img.src = source;
+                if(i===j){
+                    left.appendChild(img)
+                }else if( j === i+1){
+                    center.appendChild(img)
+                }else if(j === i+2){
+                    right.appendChild(img)
+                }
+            }
+            i += 3;
+        }
+        const themer  = (tag) => {
+            let { background } = document.body.style;
+            if(background !== "rgb(51, 51, 51)"){
+                document.body.style.animation = 'darken 1.2s ease-in-out';
+                document.querySelector('header>div>div').style.animation = 'darken 1s ease-in-out';
+                document.querySelector('#adjust').style.animation = 'RotatorOne 1s cubic-bezier(.48,0,.36,1.48)';
+                setTimeout(()=>document.querySelector('#adjust').style.transform = 'rotate(180deg)',1000)
+                setTimeout(()=>{
+                    document.body.style.background = "#333";
+                    document.querySelector('header>div>div').style.background = '#333';
+                    document.querySelector('header>div>div').style.color = 'whitesmoke';
+                },1000)
+            }else{
+                document.body.style.animation = 'lighten 1s ease-in-out';
+                document.querySelector('header>div>div').style.animation = 'lighten 1s ease-in-out';
+                document.querySelector('#adjust').style.animation = 'RotatorTwo 1s cubic-bezier(.48,0,.36,1.48)';
+                setTimeout(()=>document.querySelector('#adjust').style.transform = 'rotate(360deg)',1000)
+                setTimeout(()=>{
+                    document.body.style.background = "white";
+                    document.querySelector('header>div>div').style.background = 'whitesmoke';
+                    document.querySelector('header>div>div').style.color = '#333';
+                },1000)
+            }
+        }
+    </script>
+</body>
+</html>
